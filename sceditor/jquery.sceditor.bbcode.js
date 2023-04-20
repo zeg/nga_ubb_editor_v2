@@ -1394,273 +1394,7 @@
                 ':woot:': 'emoticons/w00t.png',
                 ':wassat:': 'emoticons/wassat.png'
             },
-            hidden: {
-                '[s:0:1]': 'smile.gif',
-                '[s:0:2]': 'mrgreen.gif',
-                '[s:0:3]': 'question.gif',
-                '[s:0:4]': 'wink.gif',
-                '[s:0:5]': 'redface.gif',
-                '[s:0:6]': 'sad.gif',
-                '[s:0:7]': 'cool.gif',
-                '[s:0:8]': 'crazy.gif',
-                '[s:0:24]': '04.gif',
-                '[s:0:25]': '05.gif',
-                '[s:0:26]': '06.gif',
-                '[s:0:27]': '07.gif',
-                '[s:0:28]': '08.gif',
-                '[s:0:29]': '09.gif',
-                '[s:0:30]': '10.gif',
-                '[s:0:32]': '12.gif',
-                '[s:0:33]': '13.gif',
-                '[s:0:34]': '14.gif',
-                '[s:0:35]': '15.gif',
-                '[s:0:36]': '16.gif',
-                '[s:0:37]': '17.gif',
-                '[s:0:38]': '18.gif',
-                '[s:0:39]': '19.gif',
-                '[s:0:40]': '20.gif',
-                '[s:0:41]': '21.gif',
-                '[s:0:42]': '22.gif',
-                '[s:0:43]': '23.gif',
-                '[s:ac:blink]': 'ac0.png',
-                '[s:ac:goodjob]': 'ac1.png',
-                '[s:ac:上]': 'ac2.png',
-                '[s:ac:中枪]': 'ac3.png',
-                '[s:ac:偷笑]': 'ac4.png',
-                '[s:ac:冷]': 'ac5.png',
-                '[s:ac:凌乱]': 'ac6.png',
-                '[s:ac:吓]': 'ac8.png',
-                '[s:ac:吻]': 'ac9.png',
-                '[s:ac:呆]': 'ac10.png',
-                '[s:ac:咦]': 'ac11.png',
-                '[s:ac:哦]': 'ac12.png',
-                '[s:ac:哭]': 'ac13.png',
-                '[s:ac:哭1]': 'ac14.png',
-                '[s:ac:哭笑]': 'ac15.png',
-                '[s:ac:喘]': 'ac17.png',
-                '[s:ac:心]': 'ac23.png',
-                '[s:ac:囧]': 'ac21.png',
-                '[s:ac:晕]': 'ac33.png',
-                '[s:ac:汗]': 'ac34.png',
-                '[s:ac:瞎]': 'ac35.png',
-                '[s:ac:羞]': 'ac36.png',
-                '[s:ac:羡慕]': 'ac37.png',
-                '[s:ac:委屈]': 'ac22.png',
-                '[s:ac:忧伤]': 'ac24.png',
-                '[s:ac:怒]': 'ac25.png',
-                '[s:ac:怕]': 'ac26.png',
-                '[s:ac:惊]': 'ac27.png',
-                '[s:ac:愁]': 'ac28.png',
-                '[s:ac:抓狂]': 'ac29.png',
-                '[s:ac:哼]': 'ac16.png',
-                '[s:ac:喷]': 'ac18.png',
-                '[s:ac:嘲笑]': 'ac19.png',
-                '[s:ac:嘲笑1]': 'ac20.png',
-                '[s:ac:抠鼻]': 'ac30.png',
-                '[s:ac:无语]': 'ac32.png',
-                '[s:ac:衰]': 'ac40.png',
-                '[s:ac:黑枪]': 'ac44.png',
-                '[s:ac:花痴]': 'ac38.png',
-                '[s:ac:闪光]': 'ac43.png',
-                '[s:ac:擦汗]': 'ac31.png',
-                '[s:ac:茶]': 'ac39.png',
-                '[s:ac:计划通]': 'ac41.png',
-                '[s:ac:反对]': 'ac7.png',
-                '[s:ac:赞同]': 'ac42.png',
-                '[s:a2:goodjob]': 'a2_02.png',
-                '[s:a2:诶嘿]': 'a2_05.png',
-                '[s:a2:偷笑]': 'a2_03.png',
-                '[s:a2:怒]': 'a2_04.png',
-                '[s:a2:笑]': 'a2_07.png',
-                '[s:a2:那个…]': 'a2_08.png',
-                '[s:a2:哦嗬嗬嗬]': 'a2_09.png',
-                '[s:a2:舔]': 'a2_10.png',
-                '[s:a2:鬼脸]': 'a2_14.png',
-                '[s:a2:冷]': 'a2_16.png',
-                '[s:a2:大哭]': 'a2_15.png',
-                '[s:a2:哭]': 'a2_17.png',
-                '[s:a2:恨]': 'a2_21.png',
-                '[s:a2:中枪]': 'a2_23.png',
-                '[s:a2:囧]': 'a2_24.png',
-                '[s:a2:你看看你]': 'a2_25.png',
-                '[s:a2:doge]': 'a2_27.png',
-                '[s:a2:自戳双目]': 'a2_28.png',
-                '[s:a2:偷吃]': 'a2_30.png',
-                '[s:a2:冷笑]': 'a2_31.png',
-                '[s:a2:壁咚]': 'a2_32.png',
-                '[s:a2:不活了]': 'a2_33.png',
-                '[s:a2:不明觉厉]': 'a2_36.png',
-                '[s:a2:是在下输了]': 'a2_51.png',
-                '[s:a2:你为猴这么]': 'a2_53.png',
-                '[s:a2:干杯]': 'a2_54.png',
-                '[s:a2:干杯2]': 'a2_55.png',
-                '[s:a2:异议]': 'a2_47.png',
-                '[s:a2:认真]': 'a2_48.png',
-                '[s:a2:你已经死了]': 'a2_45.png',
-                '[s:a2:你这种人…]': 'a2_49.png',
-                '[s:a2:妮可妮可妮]': 'a2_18.png',
-                '[s:a2:惊]': 'a2_19.png',
-                '[s:a2:抢镜头]': 'a2_52.png',
-                '[s:a2:yes]': 'a2_26.png',
-                '[s:a2:有何贵干]': 'a2_11.png',
-                '[s:a2:病娇]': 'a2_12.png',
-                '[s:a2:lucky]': 'a2_13.png',
-                '[s:a2:poi]': 'a2_20.png',
-                '[s:a2:囧2]': 'a2_22.png',
-                '[s:a2:威吓]': 'a2_42.png',
-                '[s:a2:jojo立]': 'a2_37.png',
-                '[s:a2:jojo立2]': 'a2_38.png',
-                '[s:a2:jojo立3]': 'a2_39.png',
-                '[s:a2:jojo立4]': 'a2_41.png',
-                '[s:a2:jojo立5]': 'a2_40.png',
-                '[s:ng:呲牙笑]': 'ng_1.png',
-                '[s:ng:奸笑]': 'ng_2.png',
-                '[s:ng:问号]': 'ng_3.png',
-                '[s:ng:茶]': 'ng_4.png',
-                '[s:ng:笑指]': 'ng_5.png',
-                '[s:ng:燃尽]': 'ng_6.png',
-                '[s:ng:晕]': 'ng_7.png',
-                '[s:ng:扇笑]': 'ng_8.png',
-                '[s:ng:寄]': 'ng_9.png',
-                '[s:ng:别急]': 'ng_10.png',
-                '[s:ng:doge]': 'ng_11.png',
-                '[s:ng:丧]': 'ng_12.png',
-                '[s:ng:汗]': 'ng_13.png',
-                '[s:ng:叹气]': 'ng_15.png',
-                '[s:ng:吃饼]': 'ng_16.png',
-                '[s:ng:吃瓜]': 'ng_17.png',
-                '[s:ng:吐舌]': 'ng_18.png',
-                '[s:ng:哭]': 'ng_19.png',
-                '[s:ng:喘]': 'ng_20.png',
-                '[s:ng:心]': 'ng_21.png',
-                '[s:ng:喷]': 'ng_22.png',
-                '[s:ng:困]': 'ng_24.png',
-                '[s:ng:大哭]': 'ng_25.png',
-                '[s:ng:大惊]': 'ng_26.png',
-                '[s:ng:害怕]': 'ng_27.png',
-                '[s:ng:惊]': 'ng_28.png',
-                '[s:ng:暴怒]': 'ng_30.png',
-                '[s:ng:气愤]': 'ng_31.png',
-                '[s:ng:热]': 'ng_32.png',
-                '[s:ng:瓜不熟]': 'ng_33.png',
-                '[s:ng:瞎]': 'ng_34.png',
-                '[s:ng:色]': 'ng_35.png',
-                '[s:ng:斜眼]': 'ng_37.png',
-                '[s:ng:问号大]': 'ng_38.png',
-                '[s:pst:举手]': 'pt00.png',
-                '[s:pst:亲]': 'pt01.png',
-                '[s:pst:偷笑]': 'pt02.png',
-                '[s:pst:偷笑2]': 'pt03.png',
-                '[s:pst:偷笑3]': 'pt04.png',
-                '[s:pst:傻眼]': 'pt05.png',
-                '[s:pst:傻眼2]': 'pt06.png',
-                '[s:pst:兔子]': 'pt07.png',
-                '[s:pst:发光]': 'pt08.png',
-                '[s:pst:呆]': 'pt09.png',
-                '[s:pst:呆2]': 'pt10.png',
-                '[s:pst:呆3]': 'pt11.png',
-                '[s:pst:呕]': 'pt12.png',
-                '[s:pst:呵欠]': 'pt13.png',
-                '[s:pst:哭]': 'pt14.png',
-                '[s:pst:哭2]': 'pt15.png',
-                '[s:pst:哭3]': 'pt16.png',
-                '[s:pst:嘲笑]': 'pt17.png',
-                '[s:pst:基]': 'pt18.png',
-                '[s:pst:宅]': 'pt19.png',
-                '[s:pst:安慰]': 'pt20.png',
-                '[s:pst:幸福]': 'pt21.png',
-                '[s:pst:开心]': 'pt22.png',
-                '[s:pst:开心2]': 'pt23.png',
-                '[s:pst:开心3]': 'pt24.png',
-                '[s:pst:怀疑]': 'pt25.png',
-                '[s:pst:怒]': 'pt26.png',
-                '[s:pst:怒2]': 'pt27.png',
-                '[s:pst:怨]': 'pt28.png',
-                '[s:pst:惊吓]': 'pt29.png',
-                '[s:pst:惊吓2]': 'pt30.png',
-                '[s:pst:惊呆]': 'pt31.png',
-                '[s:pst:惊呆2]': 'pt32.png',
-                '[s:pst:惊呆3]': 'pt33.png',
-                '[s:pst:惨]': 'pt34.png',
-                '[s:pst:斜眼]': 'pt35.png',
-                '[s:pst:晕]': 'pt36.png',
-                '[s:pst:汗]': 'pt37.png',
-                '[s:pst:泪]': 'pt38.png',
-                '[s:pst:泪2]': 'pt39.png',
-                '[s:pst:泪3]': 'pt40.png',
-                '[s:pst:泪4]': 'pt41.png',
-                '[s:pst:满足]': 'pt42.png',
-                '[s:pst:满足2]': 'pt43.png',
-                '[s:pst:火星]': 'pt44.png',
-                '[s:pst:牙疼]': 'pt45.png',
-                '[s:pst:电击]': 'pt46.png',
-                '[s:pst:看戏]': 'pt47.png',
-                '[s:pst:眼袋]': 'pt48.png',
-                '[s:pst:眼镜]': 'pt49.png',
-                '[s:pst:笑而不语]': 'pt50.png',
-                '[s:pst:紧张]': 'pt51.png',
-                '[s:pst:美味]': 'pt52.png',
-                '[s:pst:背]': 'pt53.png',
-                '[s:pst:脸红]': 'pt54.png',
-                '[s:pst:脸红2]': 'pt55.png',
-                '[s:pst:腐]': 'pt56.png',
-                '[s:pst:星星眼]': 'pt57.png',
-                '[s:pst:谢]': 'pt58.png',
-                '[s:pst:醉]': 'pt59.png',
-                '[s:pst:闷]': 'pt60.png',
-                '[s:pst:闷2]': 'pt61.png',
-                '[s:pst:音乐]': 'pt62.png',
-                '[s:pst:黑脸]': 'pt63.png',
-                '[s:pst:鼻血]': 'pt64.png',
-                '[s:dt:ROLL]': 'dt01.png',
-                '[s:dt:上]': 'dt02.png',
-                '[s:dt:傲娇]': 'dt03.png',
-                '[s:dt:叉出去]': 'dt04.png',
-                '[s:dt:发光]': 'dt05.png',
-                '[s:dt:呵欠]': 'dt06.png',
-                '[s:dt:哭]': 'dt07.png',
-                '[s:dt:啃古头]': 'dt08.png',
-                '[s:dt:嘲笑]': 'dt09.png',
-                '[s:dt:心]': 'dt10.png',
-                '[s:dt:怒]': 'dt11.png',
-                '[s:dt:怒2]': 'dt12.png',
-                '[s:dt:怨]': 'dt13.png',
-                '[s:dt:惊]': 'dt14.png',
-                '[s:dt:惊2]': 'dt15.png',
-                '[s:dt:无语]': 'dt16.png',
-                '[s:dt:星星眼]': 'dt17.png',
-                '[s:dt:星星眼2]': 'dt18.png',
-                '[s:dt:晕]': 'dt19.png',
-                '[s:dt:注意]': 'dt20.png',
-                '[s:dt:注意2]': 'dt21.png',
-                '[s:dt:泪]': 'dt22.png',
-                '[s:dt:泪2]': 'dt23.png',
-                '[s:dt:烧]': 'dt24.png',
-                '[s:dt:笑]': 'dt25.png',
-                '[s:dt:笑2]': 'dt26.png',
-                '[s:dt:笑3]': 'dt27.png',
-                '[s:dt:脸红]': 'dt28.png',
-                '[s:dt:药]': 'dt29.png',
-                '[s:dt:衰]': 'dt30.png',
-                '[s:dt:鄙视]': 'dt31.png',
-                '[s:dt:闲]': 'dt32.png',
-                '[s:dt:黑脸]': 'dt33.png',
-                '[s:pg:战斗力]': 'pg01.png',
-                '[s:pg:哈啤]': 'pg02.png',
-                '[s:pg:满分]': 'pg03.png',
-                '[s:pg:衰]': 'pg04.png',
-                '[s:pg:拒绝]': 'pg05.png',
-                '[s:pg:心]': 'pg06.png',
-                '[s:pg:严肃]': 'pg07.png',
-                '[s:pg:吃瓜]': 'pg08.png',
-                '[s:pg:嘣]': 'pg09.png',
-                '[s:pg:嘣2]': 'pg10.png',
-                '[s:pg:冻]': 'pg11.png',
-                '[s:pg:谢]': 'pg12.png',
-                '[s:pg:哭]': 'pg13.png',
-                '[s:pg:响指]': 'pg14.png',
-                '[s:pg:转身]': 'pg15.png',
-            }
+            hidden: {}
         },
 
         /**
@@ -2964,62 +2698,9 @@
         }, // END_COMMAND
 
         // START_COMMAND: mytemplate
+        //todo 自定义排版
         mytemplate: {
-            _dropDown: function (editor, caller, cb) {
-                var content = document.createElement('div');
 
-                content.innerHTML = '<div>' +
-                    '<a class="sceditor-font-option" data-template="图文新闻排版" href="#">图文新闻</a>' +
-                    '<a class="sceditor-font-option" data-template="BOSS攻略" href="#">BOSS攻略</a>' +
-                    '<a class="sceditor-font-option" data-template="蓝贴更新排版一" href="#">蓝贴更新一</a>' +
-                    '<a class="sceditor-font-option" data-template="蓝贴更新排版二" href="#">蓝贴更新二</a>' +
-                    '<a class="sceditor-font-option" data-template="版务活动排版" href="#">版务活动一</a>' +
-                    '<a class="sceditor-font-option" data-template="版务活动排版二" href="#">版务活动二</a>' +
-                    '</div>';
-
-                on(content, 'click', 'a', function (e) {
-                    editor.closeDropDown(true);
-                    e.preventDefault();
-
-                    if (window.confirm("使用排版将会完全清空帖子现有内容,确定使用么?")) {
-                        cb(data(this, 'template'));
-                    }
-                });
-
-                editor.createDropDown(caller, 'inserttemplate', content);
-            },
-            exec: false,
-            txtExec: function (caller, selected) {
-                var editor = this;
-                defaultCmds.template._dropDown(editor, caller, function (template) {
-                    switch(template)
-                    {
-                        case '图文新闻排版':
-                            _NBSCEDITOR.val('[quote][size=130%][color=red][b]开场白/标题[/b][/color][/size][/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]')
-                            break;
-                        case '蓝贴更新排版一':
-                            _NBSCEDITOR.val('[quote]更新日期 简单说明\n' + '蓝贴地址[/quote]\n' + '[h]更新内容[/h]\n' + '[quote][list]\n' + '[*]职业\n' + '[list]\n' + '[*]变动\n' + '[*]变动\n' + '[/list]\n' + '\n' + '[*]职业\n' + '[list]\n' + '[*]变动\n' + '[*]变动\n' + '[/list]\n' + '\n' + '[/list]\n' + '[/quote]')
-                            break;
-                        case '蓝贴更新排版二':
-                            _NBSCEDITOR.val('[quote]更新日期 简单说明\n' + '蓝贴地址[/quote]\n' + '[quote][h]职业[/h]\n' + '[list]\n' + '[*]改动\n' + '[list]\n' + '[*]子类改动\n' + '[/list]\n' + '\n' + '[*]改动\n' + '[*]改动\n' + '[/list]\n' + '[h]职业[/h]\n' + '[list]\n' + '[*]改动\n' + '[list]\n' + '[*]子类改动\n' + '[/list]\n' + '\n' + '[*]改动\n' + '[*]改动\n' + '[/list]\n' + '[/quote]\n')
-                            break;
-                        case 'BOSS攻略':
-                            _NBSCEDITOR.val('[quote]开场白[/quote]\n' + '[quote][h]1号BOSS[/h]\n' + 'BOSS简介\n' + '图文信息等\n' + '[collapse=技能介绍][list]\n' + '[*]技能\n' + '[list]\n' + '[*]技能详情\n' + '[/list]\n' + '\n' + '[*]技能\n' + '[list]\n' + '[*] 技能详情 \n' + '[/list]\n' + '\n' + '[*]技能\n' + '[list]\n' + '[*]技能详情\n' + '[/list]\n' + '\n' + '[/list]\n' + '[/collapse]\n' + '[collapse=战斗流程]战斗流程[/collapse]\n' + '[/quote]\n' + '[quote][h]2号BOSS[/h]\n' + 'BOSS简介\n' + '图文信息等\n' + '[collapse=技能介绍][list]\n' + '[*]技能\n' + '[list]\n' + '[*]技能详情\n' + '[/list]\n' + '\n' + '[*]技能\n' + '[list]\n' + '[*] 技能详情 \n' + '[/list]\n' + '\n' + '[*]技能\n' + '[list]\n' + '[*]技能详情\n' + '[/list]\n' + '\n' + '[/list]\n' + '[/collapse]\n' + '[collapse=战斗流程]战斗流程[/collapse]\n' + '[/quote]\n')
-                            break;
-                        case '版务活动排版':
-                            _NBSCEDITOR.val('[align=center][size=150%]头图/标题[/size][/align]\n' + '[quote][h]活动介绍[/h]\n' + '[list]\n' + '[*]文字\n' + '[*]文字\n' + '[*]文字\n' + '[/list]\n' + '[/quote]\n' + '[quote][h]活动规则[/h]\n' + '[list]\n' + '[*]文字\n' + '[*]文字\n' + '[*]文字\n' + '[/list]\n' + '[/quote]\n' + '[quote][h]活动奖励[/h]\n' + '[table][tr][td]奖励内容[/td]\n' + '[td]图文介绍[/td]\n' + '[td]数量[/td]\n' + '[/tr]\n' + '[tr][td]奖励[/td]\n' + '[td]介绍[/td]\n' + '[td]1[/td]\n' + '[/tr]\n' + '[tr][td]奖励[/td]\n' + '[td]介绍 [/td]\n' + '[td]1[/td]\n' + '[/tr]\n' + '[tr][td]奖励[/td]\n' + '[td]介绍 [/td]\n' + '[td]1[/td]\n' + '[/tr]\n' + '[tr][td]奖励[/td]\n' + '[td]介绍 [/td]\n' + '[td]1[/td]\n' + '[/tr]\n' + '[/table]\n' + '[/quote]\n')
-                            break;
-                        case '版务活动排版二':
-                            _NBSCEDITOR.val('[quote][b][color=crimson][size=130%]活动介绍说明开场白[/size][/color][/b][/quote]\n' + '[quote][h]活动内容[/h]\n' + '活动内容[/quote]\n' + '[quote][h]活动奖励[/h]\n' + '奖励奖励[/quote]\n' + '[quote][h]活动须知[/h]\n' + '补充补充[/quote]')
-                            break;
-
-                        default:
-                            return;
-                    }
-                    _NBSCEDITOR.toggleSourceMode();
-                });
-            },
-            tooltip: '自定义模板(源码模式可用)'
         }, // END_COMMAND
 
         // START_COMMAND: Unlink
@@ -4495,7 +4176,7 @@
             var range = rangeHelper.cloneSelected();
             var rangeStart = -1;
             var rangeStartContainer = range.startContainer;
-            var previousText = prev.nodeValue || '';
+            var previousText = (prev && prev.nodeValue) || '';
 
             previousText += data(emoticon, 'sceditor-emoticon');
 
@@ -10384,20 +10065,20 @@
             allowedChildren: ['#'],
             quoteType: QuoteType.never,
             format: function (element, content) {
-                var width,
-                    height,
-                    attribs = '',
-                    style = function (name) {
-                        return element.style ? element.style[name] : null;
-                    };
+                // var width,
+                //     height,
+                //     attribs = '',
+                //     style = function (name) {
+                //         return element.style ? element.style[name] : null;
+                //     };
 
                 // check if this is an emoticon image
                 if (attr(element, EMOTICON_DATA_ATTR)) {
                     return content;
                 }
 
-                width = attr(element, 'width') || style('width');
-                height = attr(element, 'height') || style('height');
+                // width = attr(element, 'width') || style('width');
+                // height = attr(element, 'height') || style('height');
 
                 // only add width and height if one is specified
                 // if ((element.complete && (width || height)) || (width && height)) {
@@ -10405,7 +10086,7 @@
                 //     attribs = '=' + dom.width(element) + 'x' + dom.height(element);
                 // }
 
-                return '[img]' + attr(element, 'src') + '[/img]';
+                return '[img]' + attr(element, 'title') + '[/img]';
             },
             html: function (token, attrs, content) {
                 var undef,

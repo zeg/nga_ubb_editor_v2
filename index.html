@@ -20,6 +20,7 @@
 <script src="sceditor/nga/ngacode.js"></script>
 <script>
     var __IMG_BASE = ''
+    var __IMGPATH = ''
     var _ORIGIN = ''
     var _NBSCEDITOR;
     var nbWysiwygtextarea = document.getElementById('nbWysiwyg');
@@ -49,18 +50,22 @@
         },
         tooltip: '上传图片',
         shortcut: 'Alt+3',
+    }).set('setheight', {
+        exec: function () {
+            this.height() > 600 ? setHeight(500) : setHeight(800)
+        },
+        txtExec: function () {
+            this.height() > 600 ? setHeight(500) : setHeight(800)
+        },
+        tooltip: '切换编辑区域大小',
+        shortcut: 'Alt+F',
     })
 
-    var setHeight = function () {//设置上层窗口高度
-            if (window.parent && _ORIGIN) {
-                if (_PREVHEIGHT != document.documentElement.scrollHeight) {
-                    _PREVHEIGHT = document.documentElement.scrollHeight
-                    _NBSCEDITOR.height(_PREVHEIGHT - 10)
-                    window.parent.postMessage('wysiwygEditorReciveHeight null ' + _PREVHEIGHT, _ORIGIN)
-                }
-            }
-        },
-        _PREVHEIGHT = 0
+    var setHeight = function (setHeight = 500) {//设置上层窗口高度
+        if (window.parent && _ORIGIN) {
+            window.parent.postMessage('wysiwygEditorReciveHeight null ' + setHeight, _ORIGIN)
+        }
+    }
 
     var __IMG_GET_SRC = function () {//向上层窗口请求[img]的显示src
         // console.log('__IMG_GET_SRC call')
@@ -93,14 +98,30 @@
         // console.log('__IMG_SET_SRC call')
         if (s) {
             var o = __IMG_GET_SRC.index[s.id]
+            o.src = s.src
             if (s.srct && s.src != s.srct && s.w && s.h) {
-                o.src = s.srct
+                o.title = s.srcoo
             } else {
-                o.src = s.srcoo
+                o.title = s.srcoo
             }
             if (s.w && s.h) {
                 o.style.width = s.w + 'px'
                 o.style.height = s.h + 'px'
+            }
+        }
+    }
+
+    __SMILES = {}
+    __SMILES_MAP = {hidden: {}}
+    var __SMILES_INIT = function (s) {
+        var exp = []
+        for (var k in s) {
+            for (var i in s[k]) {
+                if (i.charAt(0) !== '_') {
+                    var iv = s[k][i],
+                        ik = '[s:' + k + ':' + i + ']'
+                    __SMILES_MAP.hidden[ik] = iv
+                }
             }
         }
     }
@@ -117,39 +138,41 @@
         _ORIGIN = e.origin
         if (call) {
             if (call == 'loadContentFromParentFrame') {
-                _NBSCEDITOR.val(a)
-                setHeight()
-            } else if (call == 'returnContentToParent') {
-                window.parent.postMessage('wysiwygEditorReciveContent null ' + _NBSCEDITOR.val(), e.origin)
-            } else if (call == 'setVarFromParentFrame') {
-                eval(a)
-
                 sceditor.create(nbWysiwygtextarea, {
                     plugins: 'undo,alternative-lists',
-                    toolbar: 'font,size,color|italic,underline,strike|emoticon,image|quote,collapse,horizontal|at,dice,,gotid,gopid|bulletlist,orderedlist,indent,outdent|left,center,right|removeformat,cut,copy,paste,pastetext|table,code|link,unlink,subscript,superscript|date,time|template,mytemplate,source,help',
+                    toolbar: 'font,size,color|italic,underline,strike|emoticon,image|quote,collapse,horizontal|at,dice,,gotid,gopid|bulletlist,orderedlist,indent,outdent|left,center,right|removeformat,cut,copy,paste,pastetext|table,code|link,unlink,subscript,superscript|date,time|template,source,setheight,help',
                     format: 'bbcode',
                     locale: 'cn',
+                    emoticons: __SMILES_MAP,
                     emoticonsEnabled: false,
-                    emoticonsRoot: __IMG_BASE + '/ngabbs/post/smile/',
+                    emoticonsRoot: __IMGPATH + '/post/smile/',
                     icons: 'monocons',
                     style: 'sceditor/nga/content4nga.css',
-                    allowedAttributes: ['onclick'],
+                    allowedAttributes: ['onclick', 'srcubb'],
                     breakAfterBlock: false,
                 });
 
                 _NBSCEDITOR = sceditor.instance(nbWysiwygtextarea);
-                _NBSCEDITOR.height(500)
+                setHeight();
                 _NBSCEDITOR.maximize(true);
                 _NBSCEDITOR.emoticons(true);
 
                 _NBSCEDITOR.bind('valuechanged', function () {
-                    setHeight();
+                    __IMG_GET_SRC();
                 });
 
                 _NBSCEDITOR.bind('nodechanged', function () {
                     __IMG_GET_SRC();
-                    setHeight();
                 });
+
+                _NBSCEDITOR.bind('focus', function () {
+                    __IMG_GET_SRC();
+                });
+                _NBSCEDITOR.val(a)
+            } else if (call == 'returnContentToParent') {
+                window.parent.postMessage('wysiwygEditorReciveContent null ' + _NBSCEDITOR.val(), e.origin)
+            } else if (call == 'setVarFromParentFrame') {
+                eval(a)
 
             } else if (call == 'insertCodeFromParentFrame') {
                 //光标处插入bbs代码
@@ -165,6 +188,10 @@
             } else if (call == 'setImgSrc') {
                 //接收上层窗口返回的图片src
                 __IMG_SET_SRC(JSON.parse(a))
+            } else if (call == 'setSmilesFromParentFrame') {
+                //NGA表情包初始化
+                __SMILES = JSON.parse(a)
+                __SMILES_INIT(__SMILES)
             }
         }
     })
