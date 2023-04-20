@@ -9751,7 +9751,13 @@
                 var editor = this;
 
                 getEditorCommand('link')._dropDown(editor, caller, function (url, text) {
-                    editor.insertText('[url=' + url + ']' + (text || selected || url) + '[/url]');
+                    console.log(text)
+                    if(text==''){
+                        editor.insertText('[url]' + (text || selected || url) + '[/url]');
+                    }else{
+                        editor.insertText('[url=' + url + ']' + (text || selected || url) + '[/url]');
+                    }
+
                 });
             }
         },
@@ -10133,8 +10139,12 @@
 
                 // make sure this link is not an e-mail,
                 // if it is return e-mail BBCode
-                if (url.substr(0, 7) === 'mailto:') {
-                    return '[email="' + url.substr(7) + '"]' + content + '[/email]';
+                // if (url.substr(0, 7) === 'mailto:') {
+                //     return '[email="' + url.substr(7) + '"]' + content + '[/email]';
+                // }
+
+                if(content==url){
+                    return '[url]' + content + '[/url]';
                 }
 
                 return '[url=' + url + ']' + content + '[/url]';
