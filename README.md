@@ -5,7 +5,7 @@ NGA编辑器的可视化版本，基于**SCEditor**
 
 </div>
 
-### 使用
+## 使用
 
 如果看不到切换可视化编辑器的按钮 在控制台输入
 ```javascript
@@ -13,14 +13,15 @@ postfunc.useWysiwyg = 1
 ```
 然后按住发帖按钮直到变色
 
-### 开发
+## 开发
 如果要本地调试 首先需要在本机安装http服务 使本地代码可以在浏览器中访问 在控制台输入
 ```javascript
 __SCRIPTS.ubbeditor = 'https://127.0.0.1/...你本地的代码路径../index.html'
 ```
 然后再打开编辑器
 
-### 变量
+## 变量
+
 以下常用变量已由父页面导入至编辑器页面
 
 - __NOW
@@ -43,3 +44,18 @@ __SCRIPTS.ubbeditor = 'https://127.0.0.1/...你本地的代码路径../index.htm
 - __CSSBASE
 - __UICON_BASE
 
+## 父页面通讯
+
+- 接收
+  - setVarFromParentFrame
+  - setSmilesFromParentFrame
+  - loadContentFromParentFrame
+  - insertCodeFromParentFrame
+  - setImgSrc
+  - returnContentToParent
+- 回传
+  - wysiwygEditorSmileSelect
+  - wysiwygEditorImageUpload
+  - wysiwygEditorReciveHeight
+  - wysiwygEditorReciveContent
+  - wysiwygEditorParseImgSrc

@@ -46,3 +46,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# nbyang
+*.host
+
