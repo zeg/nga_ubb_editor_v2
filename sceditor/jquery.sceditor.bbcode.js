@@ -9751,7 +9751,6 @@
                 var editor = this;
 
                 getEditorCommand('link')._dropDown(editor, caller, function (url, text) {
-                    console.log(text)
                     if(text==''){
                         editor.insertText('[url]' + (text || selected || url) + '[/url]');
                     }else{
