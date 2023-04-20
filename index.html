@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>SCEditor4nga@nbyang</title>
+    <link rel="stylesheet" href="sceditor/nga/main4nga.css" id="theme-style"/>
+    <script src="sceditor/jquery-3.6.4.min.js"></script>
+    <script src="sceditor/jquery.sceditor.bbcode.js"></script>
+    <script src="sceditor/languages/cn.js"></script>
+    <script src="sceditor/plugins/alternative-lists.js"></script>
+    <script src="sceditor/plugins/undo.js"></script>
+    <script src="sceditor/icons/monocons.js"></script>
+</head>
+<body>
+<form action="" method="post">
+    <div>
+        <textarea id="nbWysiwyg" style="width:100%;">[s:ac:blink]</textarea>
+    </div>
+</form>
+<script src="sceditor/nga/ngacode.js"></script>
+<script>
+    var __IMG_BASE = ''
+    var _ORIGIN = ''
+    var _NBSCEDITOR;
+    var nbWysiwygtextarea = document.getElementById('nbWysiwyg');
+
+    sceditor.command.set('emoticon', {
+        exec: function () {
+            window.parent.postMessage('wysiwygEditorSmileSelect null null', _ORIGIN)
+        },
+        txtExec: function () {
+            window.parent.postMessage('wysiwygEditorSmileSelect null null', _ORIGIN)
+        },
+        tooltip: '插入表情',
+    }).set('help', {
+        exec: function () {
+            window.open('https://bbs.nga.cn/read.php?tid=18025544');
+        },
+        txtExec: function () {
+            window.open('https://bbs.nga.cn/read.php?tid=18025544');
+        },
+        tooltip: '帮助 & BUG反馈',
+    }).set('image', {
+        exec: function () {
+            window.parent.postMessage('wysiwygEditorImageUpload null null', _ORIGIN)
+        },
+        txtExec: function () {
+            window.parent.postMessage('wysiwygEditorImageUpload null null', _ORIGIN)
+        },
+        tooltip: '上传图片',
+        shortcut: 'Alt+3',
+    })
+
+    var setHeight = function () {//设置上层窗口高度
+            if (window.parent && _ORIGIN) {
+                if (_PREVHEIGHT != document.documentElement.scrollHeight) {
+                    _PREVHEIGHT = document.documentElement.scrollHeight
+                    _NBSCEDITOR.height(_PREVHEIGHT - 10)
+                    window.parent.postMessage('wysiwygEditorReciveHeight null ' + _PREVHEIGHT, _ORIGIN)
+                }
+            }
+        },
+        _PREVHEIGHT = 0
+
+    var __IMG_GET_SRC = function () {//向上层窗口请求[img]的显示src
+        // console.log('__IMG_GET_SRC call')
+        try {
+            var s,
+                f = _NBSCEDITOR.getBody()
+        } catch (e) {
+        }
+        if (f) {
+            __IMG_GET_SRC.index = {}
+            var x = f.getElementsByTagName('img')
+            for (var i = 0; i < x.length; i++) {
+                var src = x[i].getAttribute('src')
+                if (src) {
+                    var o = x[i]
+                    if (!o.id) o.id = 'code_img_' + (__IMG_GET_SRC.i++)
+                    __IMG_GET_SRC.index[o.id] = o
+                    window.parent.postMessage('wysiwygEditorParseImgSrc null ' + JSON.stringify({
+                        'id': o.id,
+                        'src': src
+                    }), _ORIGIN)
+                }
+            }
+        }
+    }//
+    __IMG_GET_SRC.i = 1
+    __IMG_GET_SRC.index = {}
+
+    var __IMG_SET_SRC = function (s) {//设置图片src
+        // console.log('__IMG_SET_SRC call')
+        if (s) {
+            var o = __IMG_GET_SRC.index[s.id]
+            if (s.srct && s.src != s.srct && s.w && s.h) {
+                o.src = s.srct
+            } else {
+                o.src = s.srcoo
+            }
+            if (s.w && s.h) {
+                o.style.width = s.w + 'px'
+                o.style.height = s.h + 'px'
+            }
+        }
+    }
+
+    window.addEventListener("message", function (e) {
+        if (!e.origin.match(/(?:nga\.cn|ngacn\.cc|nga\.178\.com|nga\.donews\.com|ngabbs.com|bigccq\.cn)(?::\d+)?$/)) return
+        var call,
+            callback,
+            a = (e.data + '').replace(/^([^\s]+)\s+([^\s]+)\s+/, function ($0, $1, $2) {
+                call = $1;
+                callback = $2;
+                return ''
+            })
+        _ORIGIN = e.origin
+        if (call) {
+            if (call == 'loadContentFromParentFrame') {
+                _NBSCEDITOR.val(a)
+                setHeight()
+            } else if (call == 'returnContentToParent') {
+                window.parent.postMessage('wysiwygEditorReciveContent null ' + _NBSCEDITOR.val(), e.origin)
+            } else if (call == 'setVarFromParentFrame') {
+                eval(a)
+
+                sceditor.create(nbWysiwygtextarea, {
+                    plugins: 'undo,alternative-lists',
+                    toolbar: 'font,size,color|italic,underline,strike|emoticon,image|quote,collapse,horizontal|at,dice,,gotid,gopid|bulletlist,orderedlist,indent,outdent|left,center,right|removeformat,cut,copy,paste,pastetext|table,code|link,unlink,subscript,superscript|date,time|template,mytemplate,source,help',
+                    format: 'bbcode',
+                    locale: 'cn',
+                    emoticonsEnabled: false,
+                    emoticonsRoot: __IMG_BASE + '/ngabbs/post/smile/',
+                    icons: 'monocons',
+                    style: 'sceditor/nga/content4nga.css',
+                    allowedAttributes: ['onclick'],
+                    breakAfterBlock: false,
+                });
+
+                _NBSCEDITOR = sceditor.instance(nbWysiwygtextarea);
+                _NBSCEDITOR.height(500)
+                _NBSCEDITOR.maximize(true);
+                _NBSCEDITOR.emoticons(true);
+
+                _NBSCEDITOR.bind('valuechanged', function () {
+                    setHeight();
+                });
+
+                _NBSCEDITOR.bind('nodechanged', function () {
+                    __IMG_GET_SRC();
+                    setHeight();
+                });
+
+            } else if (call == 'insertCodeFromParentFrame') {
+                //光标处插入bbs代码
+                a = JSON.parse(a)
+                if (a.extra) {
+                    if (a.extra.code == 'img') {
+                        _NBSCEDITOR.insert(a.text);
+                    }
+                    if (a.extra.code == 'smile') {
+                        _NBSCEDITOR.insert(a.text);
+                    }
+                }
+            } else if (call == 'setImgSrc') {
+                //接收上层窗口返回的图片src
+                __IMG_SET_SRC(JSON.parse(a))
+            }
+        }
+    })
+</script>
+</body>
+</html>

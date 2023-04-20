@@ -1,0 +1,93 @@
+/*! SCEditor | (C) 2011-2013, Sam Clarke | sceditor.com/license */
+html, body, p, code:before, table{
+    margin:0;
+    padding:0;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:0.95em;
+    color:#111111;
+    line-height:1.9em;
+    overflow:visible;
+    background:#fff0cd;
+    }
+html{
+    height:100%;
+    }
+.ios{
+    /* Needed for iOS scrolling bug fix */
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    }
+.ios body{
+    /* Needed for iOS scrolling bug fix */
+    position:relative;
+    overflow:auto;
+    }
+body{
+    /* Needed to make sure body covers the whole editor and that
+        long lines don't cause horizontal scrolling */
+    min-height:100%;
+    word-wrap:break-word;
+    }
+
+body.placeholder::before{
+    content:attr(placeholder);
+    color:#555555;
+    font-style:italic;
+    }
+
+ul, ol{
+    margin-top:0;
+    margin-bottom:0;
+    padding-top:0;
+    padding-bottom:0;
+    }
+
+table, td{
+    border:1px dotted #000000;
+    empty-cells:show;
+    }
+
+table td{
+    min-width:20px;
+    }
+
+code{
+    display:block;
+    background:#f1f1f1;
+    white-space:pre;
+    padding:1em;
+    text-align:left;
+    margin:.25em 0;
+    direction:ltr;
+    }
+
+blockquote{
+    background:#f2eddf;
+    margin:0.8em;
+    border:1px solid #e6e1d3;
+    padding:0.6em 0.8em;
+    }
+blockquote cite{
+    font-weight:bold;
+    display:block;
+    font-size:1em;
+    margin:0 -.5em .25em -.75em;
+    padding:0 .5em .15em .75em;
+    border-bottom:1px solid #f4e59f;
+    }
+
+h1, h2, h3, h4, h5, h6{
+    padding:0; margin:0;
+    }
+
+/* Prevent empty paragraphs from collapsing */
+div, p{
+    min-height:1.25em;
+    }
+.subtitle {font-size:1.17em;font-weight:bold;border-bottom:1px solid #cacaca;clear:both;margin:1.33em 0 0.2em 0}
+.collapse_title,.collapse_title2{-webkit-user-modify:read-only;cursor:pointer}
+.collapse_title,.collapse_title2{display:flex;align-items:center;column-gap:12px;padding:6px 12px;margin-top:0.5em;background:#ead5bc;color:inherit;font-weight:bold;line-height:1.5;text-shadow:0 1px white;text-decoration:none;}
+.collapse_title::before{content:"➕";padding:3px;background:#ead5bc;font-weight:initial;}
+.collapse_title2::before{content:"➖";padding:3px;background:#ead5bc;font-weight:initial;}
+.collapse{display:none;padding:12px;border:2px solid #ead5bc;background:#fff7d9;border-top:0;margin:0;font-size:13px;line-height:1.5;}
+
