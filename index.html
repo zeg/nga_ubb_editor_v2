@@ -5,7 +5,12 @@
     <title>SCEditor4nga@nbyang</title>
     <link rel="stylesheet" href="sceditor/nga/main4nga.css" id="theme-style"/>
     <script src="sceditor/jquery-3.6.4.min.js"></script>
-    <script src="sceditor/jquery.sceditor.bbcode.js"></script>
+    <script>
+        var _VER = location.search.match(/v=([\d\.]+)/)
+        _VER = _VER ? _VER[1] : '1.02'
+        document.write('<script src="sceditor/jquery.sceditor.bbcode.js?v=' + _VER + '"></' + 'script>')
+        document.write('<script src="sceditor/nga/ngacode.js?v=' + _VER + '"></' + 'script>')
+    </script>
     <script src="sceditor/languages/cn.js"></script>
     <script src="sceditor/plugins/alternative-lists.js"></script>
     <script src="sceditor/plugins/undo.js"></script>
@@ -17,7 +22,6 @@
         <textarea id="nbWysiwyg" style="width:100%;"></textarea>
     </div>
 </form>
-<script src="sceditor/nga/ngacode.js"></script>
 <script>
     var __IMG_BASE = ''
     var __IMGPATH = ''
@@ -61,7 +65,7 @@
         shortcut: 'Alt+F',
     })
 
-    var postPost=function () {//调用NGA发帖
+    var postPost = function () {//调用NGA发帖
         if (window.parent && _ORIGIN) {
             window.parent.postMessage('wysiwygEditorPostpost', _ORIGIN)
         }
@@ -154,7 +158,7 @@
                     emoticonsRoot: __IMGPATH + '/post/smile/',
                     icons: 'monocons',
                     style: 'sceditor/nga/content4nga.css',
-                    allowedAttributes: ['onclick','srcoo'],
+                    allowedAttributes: ['onclick', 'srcoo'],
                     breakAfterBlock: false,
                 });
 
@@ -176,6 +180,10 @@
                 });
 
                 _NBSCEDITOR.addShortcut('Ctrl+Enter', postPost);
+
+                a = a.replace(/\[td\d+/g, function (match) {
+                    return '[td width=' + match.match(/\d+/i)[0]
+                })
 
                 _NBSCEDITOR.val(a)
             } else if (call == 'returnContentToParent') {

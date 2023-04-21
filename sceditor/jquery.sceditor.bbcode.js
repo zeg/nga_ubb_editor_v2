@@ -1770,7 +1770,7 @@
 
         pastetext: '<div><label for="txt">{label}</label> ' + '<textarea cols="20" rows="7" id="txt"></textarea></div>' + '<div><input type="button" class="button" value="{insert}" />' + '</div>',
 
-        table: '<div>表格不支持合并和宽度<br/>会导致排版错乱 谨慎使用<br/><label for="rows">{rows}</label><input type="text" ' + 'id="rows" value="2" /></div>' + '<div><label for="cols">{cols}</label><input type="text" ' + 'id="cols" value="2" /></div>' + '<div><input type="button" class="button" value="{insert}"' + ' /></div>',
+        table: '<div><label for="rows">{rows}</label><input type="text" ' + 'id="rows" value="2" /></div>' + '<div><label for="cols">{cols}</label><input type="text" ' + 'id="cols" value="2" /></div>' + '<div><input type="button" class="button" value="{insert}"' + ' /></div><div style="line-height:20px"><br/>表格的合并/宽度等仅支持转换<br/>建议在传统编辑器中编辑<br/>如需设置需按以下格式在源码视图中编辑:<br/>[td width=10]<br/>[td colspan=10]<br/>[td rowspan=10]<br/>[td valign=top]<br/></div>',
 
         image: '<div><label for="image">{url}</label> ' + '<input type="text" id="image" dir="ltr" placeholder="https://" /></div>' + '<div><label for="width">{width}</label> ' + '<input type="text" id="width" size="2" dir="ltr" /></div>' + '<div><label for="height">{height}</label> ' + '<input type="text" id="height" size="2" dir="ltr" /></div>' + '<div><input type="button" class="button" value="{insert}" />' + '</div>',
 
@@ -2047,7 +2047,7 @@
         removeformat: {
             exec: 'removeformat',
             tooltip: 'Remove Formatting',
-            shortcut:'Alt+X'
+            shortcut: 'Alt+X'
         }, // END_COMMAND
 
         // START_COMMAND: Cut
@@ -2160,7 +2160,7 @@
                     editor.execCommand('indent');
                 }
             },
-            shortcut:'Tab',
+            shortcut: 'Tab',
             tooltip: 'Add indent'
         }, // END_COMMAND
         // START_COMMAND: Outdent
@@ -2175,7 +2175,7 @@
                 }
             },
             tooltip: 'Remove one indent',
-            shortcut:'Shift+Tab'
+            shortcut: 'Shift+Tab'
         }, // END_COMMAND
 
         // START_COMMAND: Table
@@ -2272,7 +2272,7 @@
                 });
             },
             tooltip: 'Insert an image',
-            shortcuts:'Alt+3'
+            shortcuts: 'Alt+3'
         }, // END_COMMAND
 
         // START_COMMAND: E-mail
@@ -2363,17 +2363,17 @@
         horizontal: {
             exec: function (caller) {
                 var editor = this;
-                var content='';
+                var content = '';
                 if (!editor.getRangeHelper().selectedHtml()) {
-                    content='<h4 class="subtitle"></h4>';
-                }else{
-                    content='<h4 class="subtitle">'+editor.getRangeHelper().selectedHtml()+'</h4>';
+                    content = '<h4 class="subtitle"></h4>';
+                } else {
+                    content = '<h4 class="subtitle">' + editor.getRangeHelper().selectedHtml() + '</h4>';
                 }
                 editor.wysiwygEditorInsertHtml(content);
             },
             txtExec: ['[h]', '[/h]'],
             tooltip: '段落标题/分割线',
-            shortcut:'Alt+1'
+            shortcut: 'Alt+1'
         }, // END_COMMAND
 
         // START_COMMAND: at
@@ -2417,7 +2417,7 @@
                 });
             },
             tooltip: '@用户',
-            shortcut:'Alt+2'
+            shortcut: 'Alt+2'
         }, // END_COMMAND
 
         // START_COMMAND: gotid
@@ -2580,7 +2580,7 @@
                 });
             },
             tooltip: '插入骰子',
-            shortcut:'Alt+R'
+            shortcut: 'Alt+R'
         }, // END_COMMAND
 
         // START_COMMAND: collapse
@@ -2607,7 +2607,7 @@
             },
             exec: function (caller) {
                 var editor = this;
-                defaultCmds.collapse._dropDown(editor, caller, function (text,desc) {
+                defaultCmds.collapse._dropDown(editor, caller, function (text, desc) {
 
                     var idcollapse = '点击显示隐藏的内容';
 
@@ -2619,14 +2619,14 @@
 
                     var onc = "var t=document.getElementById('collapse" + idcollapse + randid + "');if(t.style.display=='none'){t.style.display='block';this.className='collapse_title2'}else{t.style.display='none';this.className='collapse_title'}";
 
-                    var collapse_content='<div class="collapse_title sceditor-ignore" onclick="' + onc + '">' + idcollapse + '</div><div class="collapse" style="display:none" id="collapse' + idcollapse + randid + '" data-collapse-id="' + idcollapse + '">' + text + '</div>';
+                    var collapse_content = '<div class="collapse_title sceditor-ignore" onclick="' + onc + '">' + idcollapse + '</div><div class="collapse" style="display:none" id="collapse' + idcollapse + randid + '" data-collapse-id="' + idcollapse + '">' + text + '</div>';
 
                     editor.wysiwygEditorInsertHtml(collapse_content);
                 });
             },
             txtExec: function (caller, selected) {
                 var editor = this;
-                defaultCmds.collapse._dropDown(editor, caller, function (text,desc) {
+                defaultCmds.collapse._dropDown(editor, caller, function (text, desc) {
                     if (!desc) {
                         editor.insertText('[collapse]' + text + '[/collapse]');
                     } else {
@@ -2635,7 +2635,7 @@
                 });
             },
             tooltip: '插入折叠的内容',
-            shortcut:'Alt+C'
+            shortcut: 'Alt+C'
         }, // END_COMMAND
 
         // START_COMMAND: template
@@ -2643,14 +2643,7 @@
             _dropDown: function (editor, caller, cb) {
                 var content = document.createElement('div');
 
-                content.innerHTML = '<div>' +
-                    '<a class="sceditor-font-option" data-template="图文新闻排版" href="#">图文新闻</a>' +
-                    '<a class="sceditor-font-option" data-template="BOSS攻略" href="#">BOSS攻略</a>' +
-                    '<a class="sceditor-font-option" data-template="蓝贴更新排版一" href="#">蓝贴更新一</a>' +
-                    '<a class="sceditor-font-option" data-template="蓝贴更新排版二" href="#">蓝贴更新二</a>' +
-                    '<a class="sceditor-font-option" data-template="版务活动排版" href="#">版务活动一</a>' +
-                    '<a class="sceditor-font-option" data-template="版务活动排版二" href="#">版务活动二</a>' +
-                    '</div>';
+                content.innerHTML = '<div>' + '<a class="sceditor-font-option" data-template="图文新闻排版" href="#">图文新闻</a>' + '<a class="sceditor-font-option" data-template="BOSS攻略" href="#">BOSS攻略</a>' + '<a class="sceditor-font-option" data-template="蓝贴更新排版一" href="#">蓝贴更新一</a>' + '<a class="sceditor-font-option" data-template="蓝贴更新排版二" href="#">蓝贴更新二</a>' + '<a class="sceditor-font-option" data-template="版务活动排版" href="#">版务活动一</a>' + '<a class="sceditor-font-option" data-template="版务活动排版二" href="#">版务活动二</a>' + '</div>';
 
                 on(content, 'click', 'a', function (e) {
                     editor.closeDropDown(true);
@@ -2667,8 +2660,7 @@
             txtExec: function (caller, selected) {
                 var editor = this;
                 defaultCmds.template._dropDown(editor, caller, function (template) {
-                    switch(template)
-                    {
+                    switch (template) {
                         case '图文新闻排版':
                             _NBSCEDITOR.val('[quote][size=130%][color=red][b]开场白/标题[/b][/color][/size][/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]\n' + '[quote][h]段落标题[/h]\n' + '段落文字/图片[/quote]')
                             break;
@@ -2699,9 +2691,7 @@
 
         // START_COMMAND: mytemplate
         //todo 自定义排版
-        mytemplate: {
-
-        }, // END_COMMAND
+        mytemplate: {}, // END_COMMAND
 
         // START_COMMAND: Unlink
         unlink: {
@@ -2742,7 +2732,7 @@
                 this.wysiwygEditorInsertHtml(before, end);
             },
             tooltip: 'Insert a Quote',
-            shortcut:'Alt+Q'
+            shortcut: 'Alt+Q'
         }, // END_COMMAND
 
         // START_COMMAND: Emoticons
@@ -2811,7 +2801,7 @@
                 defaultCmds.emoticon.exec.call(this, caller);
             },
             tooltip: 'Insert an emoticon',
-            shortcut:'Alt+E'
+            shortcut: 'Alt+E'
         }, // END_COMMAND
 
         // START_COMMAND: YouTube
@@ -9751,9 +9741,9 @@
                 var editor = this;
 
                 getEditorCommand('link')._dropDown(editor, caller, function (url, text) {
-                    if(text==''){
+                    if (text == '') {
                         editor.insertText('[url]' + (text || selected || url) + '[/url]');
-                    }else{
+                    } else {
                         editor.insertText('[url=' + url + ']' + (text || selected || url) + '[/url]');
                     }
 
@@ -10028,8 +10018,58 @@
             },
             allowsEmpty: true,
             isInline: false,
-            format: '[td]{0}[/td]',
-            html: '<td>{0}</td>'
+            format: function (element, content) {
+                var td_attr = ''
+                if (attr(element, 'colspan')) {
+                    td_attr += ' colspan=' + attr(element, 'colspan')
+                }
+                if (attr(element, 'width')) {
+                    td_attr += ' width=' + attr(element, 'width')
+                }
+                if (attr(element, 'valign')) {
+                    td_attr += ' valign=' + attr(element, 'valign')
+                }
+                if (attr(element, 'rowspan')) {
+                    td_attr += ' rowspan=' + attr(element, 'rowspan')
+                }
+                return '[td' + td_attr + ']' + content + '[/td]'
+            },
+            html: function (token, attrs, content) {
+
+                var td_attr = ''
+                var reg_colspan = /colspan(\d+)/i
+                var reg_rowspan = /rowspan(\d+)/i
+                var reg_width = /width(\d+)/i
+                var reg_top = /top/i
+
+                if (attrs.colspan) {
+                    td_attr += ' colspan="' + attrs.colspan + '"'
+                }
+                if (attrs.rowspan) {
+                    td_attr += ' rowspan="' + attrs.rowspan + '"'
+                }
+                if (attrs.width) {
+                    td_attr += ' width="' + attrs.width + '"'
+                }
+                if (attrs.valign) {
+                    td_attr += ' valign="' + attrs.valign + '"'
+                }
+
+                if (reg_colspan.test(token.val)) {
+                    td_attr += ' colspan="' + RegExp.$1 + '"'
+                }
+                if (reg_rowspan.test(token.val)) {
+                    td_attr += ' rowspan="' + RegExp.$1 + '"'
+                }
+                if (reg_width.test(token.val)) {
+                    td_attr += ' width="' + RegExp.$1 + '"'
+                }
+                if (reg_top.test(token.val)) {
+                    td_attr += ' valign="top"'
+                }
+
+                return '<td' + td_attr + '>' + content + '</td>'
+            }
         }, // END_COMMAND
 
         // START_COMMAND: Emoticons
@@ -10111,7 +10151,7 @@
                     attribs += ' height="' + escapeEntities(height, true) + '"';
                 }
 
-                return '<img' + attribs + ' src="' + escapeUriScheme(content) + '" srcoo="'+ content +'"/>';
+                return '<img' + attribs + ' src="' + escapeUriScheme(content) + '" srcoo="' + content + '"/>';
             }
         }, // END_COMMAND
 
@@ -10133,7 +10173,7 @@
                 //     return '[email="' + url.substr(7) + '"]' + content + '[/email]';
                 // }
 
-                if(content==url){
+                if (content == url) {
                     return '[url]' + content + '[/url]';
                 }
 
