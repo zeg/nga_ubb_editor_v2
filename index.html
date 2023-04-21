@@ -14,7 +14,7 @@
 <body>
 <form action="" method="post">
     <div>
-        <textarea id="nbWysiwyg" style="width:100%;">[s:ac:blink]</textarea>
+        <textarea id="nbWysiwyg" style="width:100%;"></textarea>
     </div>
 </form>
 <script src="sceditor/nga/ngacode.js"></script>
@@ -61,6 +61,12 @@
         shortcut: 'Alt+F',
     })
 
+    var postPost=function () {//调用NGA发帖
+        if (window.parent && _ORIGIN) {
+            window.parent.postMessage('wysiwygEditorPostpost', _ORIGIN)
+        }
+    }
+
     var setHeight = function (setHeight = 500) {//设置上层窗口高度
         if (window.parent && _ORIGIN) {
             window.parent.postMessage('wysiwygEditorReciveHeight null ' + setHeight, _ORIGIN)
@@ -100,9 +106,9 @@
             var o = __IMG_GET_SRC.index[s.id]
             o.src = s.src
             if (s.srct && s.src != s.srct && s.w && s.h) {
-                o.title = s.srcoo
+                o.srcoo = s.srcoo
             } else {
-                o.title = s.srcoo
+                o.srcoo = s.srcoo
             }
             if (s.w && s.h) {
                 o.style.width = s.w + 'px'
@@ -148,7 +154,7 @@
                     emoticonsRoot: __IMGPATH + '/post/smile/',
                     icons: 'monocons',
                     style: 'sceditor/nga/content4nga.css',
-                    allowedAttributes: ['onclick', 'srcubb'],
+                    allowedAttributes: ['onclick','srcoo'],
                     breakAfterBlock: false,
                 });
 
@@ -168,12 +174,14 @@
                 _NBSCEDITOR.bind('focus', function () {
                     __IMG_GET_SRC();
                 });
+
+                _NBSCEDITOR.addShortcut('Ctrl+Enter', postPost);
+
                 _NBSCEDITOR.val(a)
             } else if (call == 'returnContentToParent') {
                 window.parent.postMessage('wysiwygEditorReciveContent null ' + _NBSCEDITOR.val(), e.origin)
             } else if (call == 'setVarFromParentFrame') {
                 eval(a)
-
             } else if (call == 'insertCodeFromParentFrame') {
                 //光标处插入bbs代码
                 a = JSON.parse(a)

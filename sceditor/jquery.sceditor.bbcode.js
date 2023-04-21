@@ -10082,16 +10082,7 @@
                     return content;
                 }
 
-                // width = attr(element, 'width') || style('width');
-                // height = attr(element, 'height') || style('height');
-
-                // only add width and height if one is specified
-                // if ((element.complete && (width || height)) || (width && height)) {
-                //
-                //     attribs = '=' + dom.width(element) + 'x' + dom.height(element);
-                // }
-
-                return '[img]' + attr(element, 'title') + '[/img]';
+                return '[img]' + attr(element, 'srcoo') + '[/img]';
             },
             html: function (token, attrs, content) {
                 var undef,
@@ -10120,7 +10111,7 @@
                     attribs += ' height="' + escapeEntities(height, true) + '"';
                 }
 
-                return '<img' + attribs + ' src="' + escapeUriScheme(content) + '" />';
+                return '<img' + attribs + ' src="' + escapeUriScheme(content) + '" srcoo="'+ content +'"/>';
             }
         }, // END_COMMAND
 
