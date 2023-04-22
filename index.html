@@ -107,16 +107,12 @@
     var __IMG_SET_SRC = function (s) {//设置图片src
         // console.log('__IMG_SET_SRC call')
         if (s) {
-            var o = __IMG_GET_SRC.index[s.id]
-            o.src = s.src
-            if (s.srct && s.src != s.srct && s.w && s.h) {
-                o.srcoo = s.srcoo
-            } else {
-                o.srcoo = s.srcoo
-            }
+            var o = __IMG_GET_SRC.index[s.id];
+            o.src = s.src;
+            o.srcoo = s.srcoo;
             if (s.w && s.h) {
-                o.style.width = s.w + 'px'
-                o.style.height = s.h + 'px'
+                o.style.width = s.w + 'px';
+                o.style.height = s.h + 'px';
             }
         }
     }
@@ -181,9 +177,7 @@
 
                 _NBSCEDITOR.addShortcut('Ctrl+Enter', postPost);
 
-                a = a.replace(/\[td\d+/g, function (match) {
-                    return '[td width=' + match.match(/\d+/i)[0]
-                })
+                a = a.replace(/\[td(\d+)/g, '[td width=$1')
 
                 _NBSCEDITOR.val(a)
             } else if (call == 'returnContentToParent') {
@@ -194,10 +188,7 @@
                 //光标处插入bbs代码
                 a = JSON.parse(a)
                 if (a.extra) {
-                    if (a.extra.code == 'img') {
-                        _NBSCEDITOR.insert(a.text);
-                    }
-                    if (a.extra.code == 'smile') {
+                    if (a.extra.code == 'img' || a.extra.code == 'smile') {
                         _NBSCEDITOR.insert(a.text);
                     }
                 }

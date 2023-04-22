@@ -10019,56 +10019,44 @@
             allowsEmpty: true,
             isInline: false,
             format: function (element, content) {
-                var td_attr = ''
-                if (attr(element, 'colspan')) {
-                    td_attr += ' colspan=' + attr(element, 'colspan')
-                }
-                if (attr(element, 'width')) {
-                    td_attr += ' width=' + attr(element, 'width')
-                }
-                if (attr(element, 'valign')) {
-                    td_attr += ' valign=' + attr(element, 'valign')
-                }
-                if (attr(element, 'rowspan')) {
-                    td_attr += ' rowspan=' + attr(element, 'rowspan')
-                }
-                return '[td' + td_attr + ']' + content + '[/td]'
+                var attributes = {
+                    'colspan': attr(element, 'colspan'),
+                    'width': attr(element, 'width'),
+                    'valign': attr(element, 'valign'),
+                    'rowspan': attr(element, 'rowspan')
+                };
+                var td_attr = Object.entries(attributes)
+                    .filter(([attrName, attrValue]) => attrValue)
+                    .map(([attrName, attrValue]) => `${attrName}=${attrValue}`)
+                    .join(' ');
+                return `[td${td_attr ? ' ' : ''}${td_attr}]${content}[/td]`;
             },
             html: function (token, attrs, content) {
 
-                var td_attr = ''
-                var reg_colspan = /colspan(\d+)/i
-                var reg_rowspan = /rowspan(\d+)/i
-                var reg_width = /width(\d+)/i
-                var reg_top = /top/i
+                var td_attr = '';
+                var attributes = {
+                    colspan: 'colspan',
+                    rowspan: 'rowspan',
+                    width: 'width',
+                    valign: 'valign',
+                    top: 'valign'
+                };
 
-                if (attrs.colspan) {
-                    td_attr += ' colspan="' + attrs.colspan + '"'
-                }
-                if (attrs.rowspan) {
-                    td_attr += ' rowspan="' + attrs.rowspan + '"'
-                }
-                if (attrs.width) {
-                    td_attr += ' width="' + attrs.width + '"'
-                }
-                if (attrs.valign) {
-                    td_attr += ' valign="' + attrs.valign + '"'
-                }
+                Object.keys(attrs).forEach(function(key) {
+                    if (key in attributes) {
+                        var attribute = attributes[key];
+                        var value = attrs[key] || RegExp.$2;
+                        if (attribute === 'valign') {
+                            td_attr += ' ' + attribute + '="' + value + '"';
+                        } else if (attribute === 'top' && /top/i.test(token.val)) {
+                            td_attr += ' valign="top"';
+                        } else if (value) {
+                            td_attr += ' ' + attribute + '="' + value + '"';
+                        }
+                    }
+                });
 
-                if (reg_colspan.test(token.val)) {
-                    td_attr += ' colspan="' + RegExp.$1 + '"'
-                }
-                if (reg_rowspan.test(token.val)) {
-                    td_attr += ' rowspan="' + RegExp.$1 + '"'
-                }
-                if (reg_width.test(token.val)) {
-                    td_attr += ' width="' + RegExp.$1 + '"'
-                }
-                if (reg_top.test(token.val)) {
-                    td_attr += ' valign="top"'
-                }
-
-                return '<td' + td_attr + '>' + content + '</td>'
+                return '<td' + td_attr + '>' + content + '</td>';
             }
         }, // END_COMMAND
 

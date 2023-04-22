@@ -20,7 +20,7 @@ sceditor.formats.bbcode
             },
         },
         html: function (element, attrs, content) {
-            return '<div style="text-align:' + attrs.defaultattr + '">' + content + '</div>';
+            return `<div style="text-align:${attrs.defaultattr}">${content}</div>`;
         },
         isInline: false,
         allowsEmpty: true,
@@ -33,30 +33,22 @@ sceditor.formats.bbcode
             }
         },
         format: function (element, content) {
+            const collapseId = $(element).data('collapse-id');
+            const attr = collapseId && collapseId !== '点击显示隐藏的内容' ? `=${collapseId}` : '';
 
-            var attr = '';
-            if ($(element).data('collapse-id')) {
-                attr = '=' + $(element).data('collapse-id')
-            }
-
-            if (attr === '=点击显示隐藏的内容') {
-                attr = '';
-            }
-
-            return '[collapse' + attr + ']' + content + '[/collapse]';
+            return `[collapse${attr}]${content}[/collapse]`;
         },
         html: function (element, attrs, content) {
-            var idcollapse = '点击显示隐藏的内容';
+            const defaultCollapse = attrs.defaultattr || '点击显示隐藏的内容';
+            const randomId = Math.ceil(Math.random() * 1000);
 
-            if (attrs.defaultattr) {
-                idcollapse = attrs.defaultattr;
-            }
-
-            var randid = Math.ceil(Math.random() * 1000);
-
-            var onc = "var t=document.getElementById('collapse" + randid + "');if(t.style.display=='none'){t.style.display='block';this.className='collapse_title2 sceditor-ignore'}else{t.style.display='none';this.className='collapse_title sceditor-ignore'}";
-
-            return '<div class="collapse_title sceditor-ignore" onclick="' + onc + '">' + idcollapse + '</div><div class="collapse" style="display:none" id="collapse' + randid + '" data-collapse-id="' + idcollapse + '">' + content + '</div>';
+            return `<div class="collapse_title sceditor-ignore"
+                    onclick="const t=document.getElementById('collapse${randomId}');t.style.display=t.style.display==='none'?'block':'none';this.className=t.style.display==='none'?'collapse_title sceditor-ignore':'collapse_title2 sceditor-ignore'">
+                    ${defaultCollapse}
+                  </div>
+                  <div class="collapse" style="display:none" id="collapse${randomId}" data-collapse-id="${defaultCollapse}">
+                    ${content}
+                  </div>`;
         },
         strictMatch:true,
         isInline:false,
