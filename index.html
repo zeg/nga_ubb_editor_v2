@@ -179,6 +179,10 @@
 
                 a = a.replace(/\[td(\d+)/g, '[td width=$1')
 
+                if (/^\[b\]Reply to .+\[\/b\]$/.test(a)) {
+                    a += "\n";
+                }
+
                 _NBSCEDITOR.val(a)
             } else if (call == 'returnContentToParent') {
                 window.parent.postMessage('wysiwygEditorReciveContent null ' + _NBSCEDITOR.val(), e.origin)
