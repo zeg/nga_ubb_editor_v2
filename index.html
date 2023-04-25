@@ -7,7 +7,7 @@
     <script src="sceditor/jquery-3.6.4.min.js"></script>
     <script>
         var _VER = location.search.match(/v=([\d\.]+)/)
-        _VER = _VER ? _VER[1] : '1.02'
+        _VER = _VER ? _VER[1] : '1.0'
         document.write('<script src="sceditor/jquery.sceditor.bbcode.js?v=' + _VER + '"></' + 'script>')
         document.write('<script src="sceditor/nga/ngacode.js?v=' + _VER + '"></' + 'script>')
     </script>
@@ -163,14 +163,6 @@
                 _NBSCEDITOR.maximize(true);
                 _NBSCEDITOR.emoticons(true);
 
-                _NBSCEDITOR.bind('valuechanged', function () {
-                    __IMG_GET_SRC();
-                });
-
-                _NBSCEDITOR.bind('nodechanged', function () {
-                    __IMG_GET_SRC();
-                });
-
                 _NBSCEDITOR.bind('focus', function () {
                     __IMG_GET_SRC();
                 });
@@ -194,6 +186,7 @@
                 if (a.extra) {
                     if (a.extra.code == 'img' || a.extra.code == 'smile') {
                         _NBSCEDITOR.insert(a.text);
+                        __IMG_GET_SRC();
                     }
                 }
             } else if (call == 'setImgSrc') {
