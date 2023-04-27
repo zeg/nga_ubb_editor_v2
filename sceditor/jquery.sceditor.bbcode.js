@@ -7434,17 +7434,6 @@
             var editable = wysiwygBody;
             var clipboard = e.clipboardData;
 
-            // var loadImage = function (file) {
-            //     var reader = new FileReader();
-            //     reader.onload = function (e) {
-            //         var base64Str = e.target.result
-            //         var indexBase64 = base64Str.indexOf('base64,')
-            //         var base64StrLength = String(Math.floor(base64Str.substr(indexBase64 + 7).length * 0.75)).padStart(10, '0')
-            //         base64Str=base64StrLength+base64Str
-            //     };
-            //     reader.readAsDataURL(file);
-            // };
-
             var loadImage = function (file) {
                 return new Promise(function(resolve, reject) {
                     var reader = new FileReader();
