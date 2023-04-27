@@ -7437,7 +7437,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     handlePasteData({
-                        html: '<img src="' + e.target.result + '" />'
+                        ngaimg: e.target.result
                     });
                 };
                 reader.readAsDataURL(file);
@@ -7447,31 +7447,37 @@
             // old android web views and UC browser which doesn't support the
             // paste event at all.
             if (clipboard) {
-                var data = {};
-                var types = clipboard.types;
-                var items = clipboard.items;
-
                 e.preventDefault();
 
-                for (var i = 0; i < types.length; i++) {
-                    // Word sometimes adds copied text as an image so if HTML
-                    // exists prefer that over images
-                    if (types.indexOf('text/html') < 0) {
-                        // Normalise image pasting to paste as a data-uri
-                        if (globalWin.FileReader && items && IMAGE_MIME_REGEX.test(items[i].type)) {
-                            return loadImage(clipboard.items[i].getAsFile());
-                        }
+                if(clipboard.files.length > 1){
+                    //处理NGA图片上传
+                    for (var i = 0; i < clipboard.files.length; i++) {
+                        loadImage(clipboard.files[i]);
                     }
+                }else{
+                    var data = {};
+                    var types = clipboard.types;
+                    var items = clipboard.items;
 
-                    data[types[i]] = clipboard.getData(types[i]);
+                    for (var i = 0; i < types.length; i++) {
+                        // Word sometimes adds copied text as an image so if HTML
+                        // exists prefer that over images
+                        if (types.indexOf('text/html') < 0) {
+                            // Normalise image pasting to paste as a data-uri
+                            if (globalWin.FileReader && items && IMAGE_MIME_REGEX.test(items[i].type)) {
+                                return loadImage(clipboard.items[i].getAsFile());
+                            }
+                        }
+
+                        data[types[i]] = clipboard.getData(types[i]);
+                    }
+                    // Call plugins here with file?
+                    data.text = data['text/plain'];
+                    data.html = sanitize(data['text/html']);
+                    handlePasteData(data);
+                    // If contentsFragment exists then we are already waiting for a
+                    // previous paste so let the handler for that handle this one too
                 }
-                // Call plugins here with file?
-                data.text = data['text/plain'];
-                data.html = sanitize(data['text/html']);
-
-                handlePasteData(data);
-                // If contentsFragment exists then we are already waiting for a
-                // previous paste so let the handler for that handle this one too
             } else if (!pasteContentFragment) {
                 // Save the scroll position so can be restored
                 // when contents is restored
@@ -7516,28 +7522,37 @@
 
                 // fix any invalid nesting
                 fixNesting(pasteArea);
-            } else {
+            }else  {
                 pasteArea.innerHTML = entities(data.text || '');
             }
 
-            var paste = {
-                val: pasteArea.innerHTML
-            };
 
-            if ('fragmentToSource' in format) {
-                paste.val = format
-                    .fragmentToSource(paste.val, wysiwygDocument, currentNode);
+
+            if(data.ngaimg){
+                //处理NGA图片上传
+                var paste = {
+                    val: '<img src="' + data.ngaimg + '"/>'
+                };
+                pluginManager.call('pasteHtml', paste);
+            } else{
+                var paste = {
+                    val: pasteArea.innerHTML
+                };
+
+                if ('fragmentToSource' in format) {
+                    paste.val = format
+                        .fragmentToSource(paste.val, wysiwygDocument, currentNode);
+                }
+
+                pluginManager.call('paste', paste);
+                trigger(editorContainer, 'paste', paste);
+
+                if ('fragmentToHtml' in format) {
+                    paste.val = format
+                        .fragmentToHtml(paste.val, currentNode);
+                }
+                pluginManager.call('pasteHtml', paste);
             }
-
-            pluginManager.call('paste', paste);
-            trigger(editorContainer, 'paste', paste);
-
-            if ('fragmentToHtml' in format) {
-                paste.val = format
-                    .fragmentToHtml(paste.val, currentNode);
-            }
-
-            pluginManager.call('pasteHtml', paste);
 
             var parent = rangeHelper.getFirstBlockParent();
             base.wysiwygEditorInsertHtml(paste.val, null, true);

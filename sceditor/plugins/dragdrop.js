@@ -66,6 +66,15 @@
 		}
 	}
 
+	function dataURLtoFile(dataurl, filename) {
+		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {type:mime});
+	}
+
 	sceditor.plugins.dragdrop = function () {
 		if (!isSupported) {
 			return;
@@ -100,7 +109,7 @@
 			}
 
 			return opts.isAllowed ? opts.isAllowed(file) : true;
-		};
+		}
 
 		function createHolder(toReplace) {
 			var placeholder = document.createElement('img');
@@ -183,7 +192,7 @@
 
 			cover = container.appendChild(sceditor.dom.parseHTML(
 				'<div class="sceditor-dnd-cover" style="display: none">' +
-					'<p>' + editor._('Drop files here') + '</p>' +
+					'<p>' + editor._('将文件拖放到此处') + '</p>' +
 				'</div>'
 			).firstChild);
 
@@ -206,7 +215,7 @@
 					var image = images[i];
 
 					if (base64DataUri.test(image.src)) {
-						var file = base64DataUriToBlob(image.src);
+						var file = dataURLtoFile(image.src);
 						if (file && isAllowed(file)) {
 							handleFile(file, createHolder(image));
 						} else {

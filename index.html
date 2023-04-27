@@ -10,11 +10,12 @@
         _VER = _VER ? _VER[1] : '1.0'
         document.write('<script src="sceditor/jquery.sceditor.bbcode.js?v=' + _VER + '"></' + 'script>')
         document.write('<script src="sceditor/nga/ngacode.js?v=' + _VER + '"></' + 'script>')
+        document.write('<script src="sceditor/plugins/dragdrop.js?v=' + _VER + '"></' + 'script>')
+        document.write('<script src="sceditor/icons/monocons.js?v=' + _VER + '"></' + 'script>')
     </script>
     <script src="sceditor/languages/cn.js"></script>
     <script src="sceditor/plugins/alternative-lists.js"></script>
     <script src="sceditor/plugins/undo.js"></script>
-    <script src="sceditor/icons/monocons.js"></script>
 </head>
 <body>
 <form action="" method="post">
@@ -67,7 +68,7 @@
 
     var postPost = function () {//调用NGA发帖
         if (window.parent && _ORIGIN) {
-            window.parent.postMessage('wysiwygEditorPostpost\tnull\tnull', _ORIGIN)
+            window.parent.postMessage('wysiwygEditorPostpost null null', _ORIGIN)
         }
     }
 
@@ -132,6 +133,20 @@
         }
     }
 
+    var dragdropOptions = {
+        allowedTypes: ['image/jpeg', 'image/png','image/gif','image/bmp','image/webp'],
+        handlePaste: true,
+        handleFile: function (file, createPlaceholder) {
+            var placeholder = createPlaceholder();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                window.parent.postMessage('wysiwygEditorUploadImg null '+e.target.result, _ORIGIN)
+                placeholder.cancel();
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     window.addEventListener("message", function (e) {
         if (!e.origin.match(/(?:nga\.cn|ngacn\.cc|nga\.178\.com|nga\.donews\.com|ngabbs.com|bigccq\.cn)(?::\d+)?$/)) return
         var call,
@@ -145,7 +160,7 @@
         if (call) {
             if (call == 'loadContentFromParentFrame') {
                 sceditor.create(nbWysiwygtextarea, {
-                    plugins: 'undo,alternative-lists',
+                    plugins: 'undo,alternative-lists,dragdrop',
                     toolbar: 'font,size,color|bold,italic,underline,strike|emoticon,image|quote,collapse,horizontal|at,dice,,gotid,gopid|bulletlist,orderedlist,indent,outdent|left,center,right|removeformat,cut,copy,paste,pastetext|table,code|link,unlink,subscript,superscript|date,time|template,source,setheight,help',
                     format: 'bbcode',
                     locale: 'cn',
@@ -156,6 +171,7 @@
                     style: 'sceditor/nga/content4nga.css',
                     allowedAttributes: ['onclick', 'srcoo'],
                     breakAfterBlock: false,
+                    dragdrop: dragdropOptions,
                 });
 
                 _NBSCEDITOR = sceditor.instance(nbWysiwygtextarea);
