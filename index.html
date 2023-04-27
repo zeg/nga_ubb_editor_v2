@@ -136,14 +136,8 @@
     var dragdropOptions = {
         allowedTypes: ['image/jpeg', 'image/png','image/gif','image/bmp','image/webp'],
         handlePaste: true,
-        handleFile: function (file, createPlaceholder) {
-            var placeholder = createPlaceholder();
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                window.parent.postMessage('wysiwygEditorUploadImg null '+e.target.result, _ORIGIN)
-                placeholder.cancel();
-            };
-            reader.readAsDataURL(file);
+        handleFile: function (ngaimg) {
+            window.parent.postMessage('wysiwygEditorUploadImg null '+ngaimg, _ORIGIN)
         }
     };
 

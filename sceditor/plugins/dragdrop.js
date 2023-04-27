@@ -66,15 +66,6 @@
 		}
 	}
 
-	function dataURLtoFile(dataurl, filename) {
-		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-			bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-		while(n--){
-			u8arr[n] = bstr.charCodeAt(n);
-		}
-		return new File([u8arr], filename, {type:mime});
-	}
-
 	sceditor.plugins.dragdrop = function () {
 		if (!isSupported) {
 			return;
@@ -169,6 +160,16 @@
 
 			hideCover();
 
+			var loadImage = function (file) {
+				return new Promise(function(resolve, reject) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						resolve(`${String(e.target.result.length).padStart(10, '0')}${e.target.result}`);
+					};
+					reader.readAsDataURL(file);
+				});
+			};
+			var promises = []
 			for (var i = 0; i < files.length; i++) {
 				// Dragging a string should be left to default
 				if (files[i].kind === 'string') {
@@ -176,9 +177,12 @@
 				}
 
 				if (isAllowed(files[i])) {
-					handleFile(files[i], createHolder());
+					promises.push(loadImage(files[i]));
 				}
 			}
+			Promise.all(promises).then(function(results) {
+				handleFile(results.join(''));
+			});
 
 			e.preventDefault();
 		}
@@ -207,24 +211,9 @@
 
 		base.signalPasteHtml = function (paste) {
 			if (!('handlePaste' in opts) || opts.handlePaste) {
-				var div = document.createElement('div');
-				div.innerHTML = paste.val;
-
-				var images = div.querySelectorAll('img');
-				for (var i = 0; i < images.length; i++) {
-					var image = images[i];
-
-					if (base64DataUri.test(image.src)) {
-						var file = dataURLtoFile(image.src);
-						if (file && isAllowed(file)) {
-							handleFile(file, createHolder(image));
-						} else {
-							image.parentNode.removeChild(image);
-						}
-					}
+				if(paste.ngaimg){
+					handleFile(paste.ngaimg);
 				}
-
-				paste.val = div.innerHTML;
 			}
 		};
 	};

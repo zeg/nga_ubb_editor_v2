@@ -7433,14 +7433,26 @@
         handlePasteEvt = function (e) {
             var editable = wysiwygBody;
             var clipboard = e.clipboardData;
+
+            // var loadImage = function (file) {
+            //     var reader = new FileReader();
+            //     reader.onload = function (e) {
+            //         var base64Str = e.target.result
+            //         var indexBase64 = base64Str.indexOf('base64,')
+            //         var base64StrLength = String(Math.floor(base64Str.substr(indexBase64 + 7).length * 0.75)).padStart(10, '0')
+            //         base64Str=base64StrLength+base64Str
+            //     };
+            //     reader.readAsDataURL(file);
+            // };
+
             var loadImage = function (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    handlePasteData({
-                        ngaimg: e.target.result
-                    });
-                };
-                reader.readAsDataURL(file);
+                return new Promise(function(resolve, reject) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        resolve(`${String(e.target.result.length).padStart(10, '0')}${e.target.result}`);
+                    };
+                    reader.readAsDataURL(file);
+                });
             };
 
             // Modern browsers with clipboard API - everything other than _very_
@@ -7448,12 +7460,18 @@
             // paste event at all.
             if (clipboard) {
                 e.preventDefault();
-
+                var tmpNgaImgStr = ''
+                var promises = []
                 if(clipboard.files.length > 1){
                     //处理NGA图片上传
                     for (var i = 0; i < clipboard.files.length; i++) {
-                        loadImage(clipboard.files[i]);
+                        if(IMAGE_MIME_REGEX.test(clipboard.files[i].type)){
+                            promises.push(loadImage(clipboard.files[i]));
+                        }
                     }
+                    Promise.all(promises).then(function(results) {
+                        handlePasteData({ ngaimg: results.join('') });
+                    });
                 }else{
                     var data = {};
                     var types = clipboard.types;
@@ -7465,7 +7483,10 @@
                         if (types.indexOf('text/html') < 0) {
                             // Normalise image pasting to paste as a data-uri
                             if (globalWin.FileReader && items && IMAGE_MIME_REGEX.test(items[i].type)) {
-                                return loadImage(clipboard.items[i].getAsFile());
+                                promises.push(loadImage(clipboard.items[i].getAsFile()))
+                                Promise.all(promises).then(function(results) {
+                                    handlePasteData({ ngaimg: results.join('') });
+                                });
                             }
                         }
 
@@ -7531,7 +7552,7 @@
             if(data.ngaimg){
                 //处理NGA图片上传
                 var paste = {
-                    val: '<img src="' + data.ngaimg + '"/>'
+                    ngaimg: data.ngaimg
                 };
                 pluginManager.call('pasteHtml', paste);
             } else{
@@ -7552,11 +7573,11 @@
                         .fragmentToHtml(paste.val, currentNode);
                 }
                 pluginManager.call('pasteHtml', paste);
-            }
 
-            var parent = rangeHelper.getFirstBlockParent();
-            base.wysiwygEditorInsertHtml(paste.val, null, true);
-            merge(parent);
+                var parent = rangeHelper.getFirstBlockParent();
+                base.wysiwygEditorInsertHtml(paste.val, null, true);
+                merge(parent);
+            }
         };
 
         /**
