@@ -89,7 +89,7 @@
             __IMG_GET_SRC.index = {}
             var x = f.getElementsByTagName('img')
             for (var i = 0; i < x.length; i++) {
-                var src = x[i].getAttribute('src')
+                var src = x[i].getAttribute('srcoo')
                 if (src) {
                     var o = x[i]
                     if (!o.id) o.id = 'code_img_' + (__IMG_GET_SRC.i++)
@@ -186,6 +186,7 @@
                 }
 
                 _NBSCEDITOR.val(a)
+                __IMG_GET_SRC();
             } else if (call == 'returnContentToParent') {
                 window.parent.postMessage('wysiwygEditorReciveContent null ' + _NBSCEDITOR.val(), e.origin)
             } else if (call == 'setVarFromParentFrame') {
